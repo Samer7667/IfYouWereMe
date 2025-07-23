@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>If You Were Me</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #222831, #393e46);
+      color: #eeeeee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #00adb5;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    input, select, button {
+      padding: 0.7rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #393e46;
+      color: #eeeeee;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #222831;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #eeeeee;
+      color: #222831;
+      border-radius: 0.5rem;
+      display: none;
+    }
+
+    .result-buttons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .result-buttons button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      background-color: #eeeeee;
+      color: #222831;
+      border: 1px solid #222831;
+      border-radius: 0.4rem;
+    }
+
+    .result-buttons button:hover {
+      background-color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>لو كنت أنا...</h1>
+    <form id="personalityForm">
+      <input type="number" placeholder="عمرك" id="age" required>
+      <input type="text" placeholder="بلدك" id="country" required>
+      <input type="text" placeholder="مهارتك المفضلة" id="skill" required>
+      <select id="goal" required>
+        <option value="" disabled selected>ما هو طموحك؟</option>
+        <option value="freedom">تحب الحرية والسفر</option>
+        <option value="money">تحب الفلوس وريادة الأعمال</option>
+        <option value="comfort">تحب الراحة والحياة الهادئة</option>
+        <option value="tech">تحب التقنية والبرمجة</option>
+      </select>
+      <button type="submit">✨ اعرف النتيجة</button>
+    </form>
+    <div class="result" id="resultBox"></div>
+  </div>
+
+  <script>
+    document.getElementById("personalityForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const age = document.getElementById("age").value;
+      const country = document.getElementById("country").value.trim().toLowerCase();
+      const skill = document.getElementById("skill").value.trim();
+      const goal = document.getElementById("goal").value;
+
+      const altLives = [
+        `كنت تصمم روبوتات في اليابان وتكتب كود وأنت تسمع Lo-Fi 🎧`,
+        `كنت رائد أعمال في سان فرانسيسكو تطلق شركة ناشئة 🚀`,
+        `كنت فنان رقمي في برلين ترسم لوحات AI 🎨`,
+        `كنت تتجول حول العالم تعمل عن بعد من شاطئ 🏝️`,
+        `كنت تدرّس برمجة في كوريا وتنشر دروس على اليوتيوب 💻`,
+        `كنت في النرويج تصنع ألعاب إنديز مشهورة 🎮`
+      ];
+
+      let chosenLife = "";
+      if (goal === "freedom") chosenLife = altLives[3];
+      else if (goal === "money") chosenLife = altLives[1];
+      else if (goal === "comfort") chosenLife = altLives[5];
+      else if (goal === "tech") chosenLife = altLives[0];
+
+      const resultText = `لو كنت شخصًا آخر غير من ${country}، عمرك ${age} سنة ومهارتك هي ${skill}... ${chosenLife}`;
+
+      const resultBox = document.getElementById("resultBox");
+      resultBox.innerHTML = `
+        <p>${resultText}</p>
+        <div class="result-buttons">
+          <button onclick="copyResult()">📋 انسخ النتيجة</button>
+          <button onclick="restartForm()">🔄 جرّب مرة أخرى</button>
+        </div>
+      `;
+      resultBox.style.display = "block";
+    });
+
+    function copyResult() {
+      const text = document.querySelector("#resultBox p").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✅ تم نسخ النتيجة!");
+      });
+    }
+
+    function restartForm() {
+      document.getElementById("personalityForm").reset();
+      document.getElementById("resultBox").style.display = "none";
+    }
+  </script>
+</body>
+</html>
