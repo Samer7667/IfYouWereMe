@@ -59,4 +59,15 @@ body {
     border-radius: 0.5rem;
     display: none;
   }
-  
+  .profile-img {
+  width: 30vw;
+  max-width: 120px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  display: block;
+  margin: 20px auto;
+}

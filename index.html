@@ -89,10 +89,11 @@
 </head>
 <body>
 
-  <img src="profile.jpg" alt="صورتك الشخصية" class="profile-img">
-
   <div class="container">
 
+  <img src="profile.jpg" alt="صورتك الشخصية" class="profile-img">
+
+  
     <h1>لو كنت أنا...</h1>
     <form id="personalityForm">
       <input type="number" placeholder="عمرك" id="age" required>
@@ -110,20 +111,7 @@
     <div class="result" id="resultBox"></div>
   </div>
 
-  <style>
-  .profile-img {
-    width: 30vw; /* 30% من عرض الشاشة */
-    max-width: 120px; /* لا يتجاوز 120px */
-    height: auto; /* يحافظ على التناسق */
-    aspect-ratio: 1 / 1; /* يجعلها مربعة دائمًا */
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    display: block;
-    margin: 20px auto;
-  }
-</style>
+
 
   <script>
     document.getElementById("personalityForm").addEventListener("submit", function (e) {
